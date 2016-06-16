@@ -51,8 +51,7 @@ Props passed to both inline and block buttons:
 Props unique to inline buttons:
 
   - **toggleInlineStyle** (_func_) - to be attached to your click event
-  -
-  **inlineStyle** (_string_) - the draft code for the style
+  - **inlineStyle** (_string_) - the draft code for the style
 
 Props unique to block buttons:
 
