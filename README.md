@@ -22,8 +22,7 @@ const {
   // inline buttons
   ItalicButton, BoldButton, MonospaceButton, UnderlineButton,
   // block buttons
-  ParagraphButton, BlockquoteButton, CodeButton, OLButton, ULButton,
-  H1Button, H2Button, H3Button, H4Button, H5Button, H6Button
+  ParagraphButton, BlockquoteButton, CodeButton, OLButton, ULButton, H1Button, H2Button, H3Button, H4Button, H5Button, H6Button
 } = richButtonsPlugin;
 ```
 
