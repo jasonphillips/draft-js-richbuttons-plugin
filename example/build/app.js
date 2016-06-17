@@ -25,13 +25,13 @@ var _draftJsPluginsEditor = require('draft-js-plugins-editor');
 
 var _draftJsPluginsEditor2 = _interopRequireDefault(_draftJsPluginsEditor);
 
-var _ = require('../');
-
-var _2 = _interopRequireDefault(_);
-
 var _draftJsBlockBreakoutPlugin = require('draft-js-block-breakout-plugin');
 
 var _draftJsBlockBreakoutPlugin2 = _interopRequireDefault(_draftJsBlockBreakoutPlugin);
+
+var _ = require('../');
+
+var _2 = _interopRequireDefault(_);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -44,8 +44,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var EditorState = _draftJs2.default.EditorState;
 var ContentState = _draftJs2.default.ContentState;
 
-var richButtonsPlugin = (0, _2.default)();
 var blockBreakoutPlugin = (0, _draftJsBlockBreakoutPlugin2.default)();
+
+var richButtonsPlugin = (0, _2.default)();
 
 var
 // inline buttons
@@ -64,31 +65,36 @@ var OLButton = richButtonsPlugin.OLButton;
 var BasicExample = function (_React$Component) {
   _inherits(BasicExample, _React$Component);
 
-  function BasicExample(props) {
+  function BasicExample() {
+    var _Object$getPrototypeO;
+
+    var _temp, _this, _ret;
+
     _classCallCheck(this, BasicExample);
 
-    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(BasicExample).call(this, props));
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
 
-    var placeholder = '<p>Add <b>rich</b> controls to your editor with minimal hassle.</p>';
-    _this.state = {
-      content: _this._getPlaceholder(placeholder)
-    };
-    return _this;
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(BasicExample)).call.apply(_Object$getPrototypeO, [this].concat(args))), _this), _this.state = {
+      content: _this._getPlaceholder()
+    }, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
   _createClass(BasicExample, [{
+    key: '_getPlaceholder',
+    value: function _getPlaceholder() {
+      var placeholder = '<p>Add <b>rich</b> controls to your editor with minimal hassle.</p>';
+      var contentHTML = _DraftPasteProcessor2.default.processHTML(placeholder);
+      var state = ContentState.createFromBlockArray(contentHTML);
+      return _draftJs2.default.EditorState.createWithContent(state);
+    }
+  }, {
     key: '_onChange',
     value: function _onChange(editorState) {
       this.setState({ content: editorState }, function () {
         richButtonsPlugin.onEditorChange(editorState);
       });
-    }
-  }, {
-    key: '_getPlaceholder',
-    value: function _getPlaceholder(placeholder) {
-      var contentHTML = _DraftPasteProcessor2.default.processHTML(placeholder);
-      var state = ContentState.createFromBlockArray(contentHTML);
-      return _draftJs2.default.EditorState.createWithContent(state);
     }
   }, {
     key: 'render',
@@ -99,11 +105,6 @@ var BasicExample = function (_React$Component) {
       return _react2.default.createElement(
         'div',
         null,
-        _react2.default.createElement(
-          'h2',
-          null,
-          'Basic Example'
-        ),
         _react2.default.createElement(
           _reactBootstrap.Well,
           { style: { marginBottom: 0 } },
@@ -167,13 +168,13 @@ var _draftJsPluginsEditor = require('draft-js-plugins-editor');
 
 var _draftJsPluginsEditor2 = _interopRequireDefault(_draftJsPluginsEditor);
 
-var _ = require('../');
-
-var _2 = _interopRequireDefault(_);
-
 var _draftJsBlockBreakoutPlugin = require('draft-js-block-breakout-plugin');
 
 var _draftJsBlockBreakoutPlugin2 = _interopRequireDefault(_draftJsBlockBreakoutPlugin);
+
+var _ = require('../');
+
+var _2 = _interopRequireDefault(_);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -186,8 +187,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var EditorState = _draftJs2.default.EditorState;
 var ContentState = _draftJs2.default.ContentState;
 
-var richButtonsPlugin = (0, _2.default)();
 var blockBreakoutPlugin = (0, _draftJsBlockBreakoutPlugin2.default)();
+
+var richButtonsPlugin = (0, _2.default)();
 
 var
 // inline buttons
@@ -196,6 +198,7 @@ var BoldButton = richButtonsPlugin.BoldButton;
 var
 // block buttons
 H2Button = richButtonsPlugin.H2Button;
+var H3Button = richButtonsPlugin.H3Button;
 var ULButton = richButtonsPlugin.ULButton;
 var OLButton = richButtonsPlugin.OLButton;
 
@@ -207,12 +210,14 @@ var MyIconButton = function MyIconButton(_ref) {
   var isActive = _ref.isActive;
   var label = _ref.label;
   var inlineStyle = _ref.inlineStyle;
+  var onMouseDown = _ref.onMouseDown;
   return _react2.default.createElement(
     _reactBootstrap.Button,
     {
       bsSize: 'small',
       onClick: toggleInlineStyle,
-      bsStyle: isActive ? 'danger' : 'default'
+      onMouseDown: onMouseDown,
+      bsStyle: isActive ? 'info' : 'default'
     },
     ' ',
     _react2.default.createElement(_reactBootstrap.Glyphicon, { glyph: glyph }),
@@ -234,38 +239,45 @@ var MyBlockButton = function MyBlockButton(_ref2) {
       onClick: toggleBlockType,
       bsStyle: isActive ? 'primary' : 'default'
     },
-    label
+    ' ',
+    label,
+    ' '
   );
 };
 
 var CustomExample = function (_React$Component) {
   _inherits(CustomExample, _React$Component);
 
-  function CustomExample(props) {
+  function CustomExample() {
+    var _Object$getPrototypeO;
+
+    var _temp, _this, _ret;
+
     _classCallCheck(this, CustomExample);
 
-    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(CustomExample).call(this, props));
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
 
-    var placeholder = '<p>You can customize your <i>own</i> buttons easily.</p>' + '<ul><li>See the buttons <b>below</b></li></ul>';
-    _this.state = {
-      content: _this._getPlaceholder(placeholder)
-    };
-    return _this;
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(CustomExample)).call.apply(_Object$getPrototypeO, [this].concat(args))), _this), _this.state = {
+      content: _this._getPlaceholder()
+    }, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
   _createClass(CustomExample, [{
+    key: '_getPlaceholder',
+    value: function _getPlaceholder() {
+      var placeholder = '<p>You can customize your <i>own</i> buttons easily.</p>' + '<ul><li>See the buttons <b>below</b></li></ul>';
+      var contentHTML = _DraftPasteProcessor2.default.processHTML(placeholder);
+      var state = ContentState.createFromBlockArray(contentHTML);
+      return _draftJs2.default.EditorState.createWithContent(state);
+    }
+  }, {
     key: '_onChange',
     value: function _onChange(editorState) {
       this.setState({ content: editorState }, function () {
         richButtonsPlugin.onEditorChange(editorState);
       });
-    }
-  }, {
-    key: '_getPlaceholder',
-    value: function _getPlaceholder(placeholder) {
-      var contentHTML = _DraftPasteProcessor2.default.processHTML(placeholder);
-      var state = ContentState.createFromBlockArray(contentHTML);
-      return _draftJs2.default.EditorState.createWithContent(state);
     }
   }, {
     key: 'render',
@@ -276,11 +288,6 @@ var CustomExample = function (_React$Component) {
       return _react2.default.createElement(
         'div',
         null,
-        _react2.default.createElement(
-          'h2',
-          null,
-          'Custom Buttons Example'
-        ),
         _react2.default.createElement(
           _reactBootstrap.Panel,
           null,
@@ -313,6 +320,11 @@ var CustomExample = function (_React$Component) {
             null,
             _react2.default.createElement(
               H2Button,
+              null,
+              _react2.default.createElement(MyBlockButton, null)
+            ),
+            _react2.default.createElement(
+              H3Button,
               null,
               _react2.default.createElement(MyBlockButton, null)
             ),
@@ -383,7 +395,53 @@ var App = function (_React$Component) {
       return _react2.default.createElement(
         _reactBootstrap.Grid,
         null,
+        _react2.default.createElement(
+          'h1',
+          { className: 'text-muted' },
+          'DraftJS RichButtons Plugin'
+        ),
+        _react2.default.createElement(
+          _reactBootstrap.Alert,
+          { bsStyle: 'info' },
+          'A plugin for the',
+          _react2.default.createElement(
+            'a',
+            { href: 'https://github.com/draft-js-plugins/draft-js-plugins' },
+            ' DraftJS Plugins Editor '
+          ),
+          'that provides a simple way to add customizable rich-text controls to your draft-js instance.'
+        ),
+        _react2.default.createElement(
+          'p',
+          null,
+          ' '
+        ),
+        _react2.default.createElement(
+          'h2',
+          null,
+          'Basic Example  ',
+          _react2.default.createElement(
+            'a',
+            { href: 'https://github.com/jasonphillips/draft-js-richbuttons-plugin/blob/master/example/BasicExample.js' },
+            '{..}'
+          )
+        ),
         _react2.default.createElement(_BasicExample2.default, null),
+        _react2.default.createElement(
+          'p',
+          null,
+          ' '
+        ),
+        _react2.default.createElement(
+          'h2',
+          null,
+          'Custom Buttons Example  ',
+          _react2.default.createElement(
+            'a',
+            { href: 'https://github.com/jasonphillips/draft-js-richbuttons-plugin/blob/master/example/CustomExample.js' },
+            '{..}'
+          )
+        ),
         _react2.default.createElement(_CustomExample2.default, null)
       );
     }
@@ -56021,6 +56079,17 @@ function _inherits(subClass, superClass) {
   }subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
 }
 
+var preventDefault = function preventDefault(event) {
+  return event.preventDefault();
+};
+
+var wrapPrevent = function wrapPrevent(callback) {
+  return function (event) {
+    event.preventDefault();
+    callback();
+  };
+};
+
 var StyleButton = function (_Component) {
   _inherits(StyleButton, _Component);
 
@@ -56068,10 +56137,11 @@ var StyleButton = function (_Component) {
 
       if (children && (typeof children === 'undefined' ? 'undefined' : _typeof(children)) == 'object') {
         var ChildInput = _react2.default.cloneElement(children, {
-          toggleInlineStyle: toggleInlineStyle,
+          toggleInlineStyle: wrapPrevent(toggleInlineStyle),
           isActive: isActive,
           label: label,
-          inlineStyle: inlineStyle
+          inlineStyle: inlineStyle,
+          onMouseDown: preventDefault
         });
 
         return ChildInput;
@@ -56084,7 +56154,11 @@ var StyleButton = function (_Component) {
         marginRight: '1em'
       };
 
-      return _react2.default.createElement('span', { onClick: toggleInlineStyle, style: spanStyle }, label);
+      return _react2.default.createElement('span', {
+        onMouseDown: preventDefault,
+        onClick: wrapPrevent(toggleInlineStyle),
+        style: spanStyle
+      }, label);
     }
   }]);
 

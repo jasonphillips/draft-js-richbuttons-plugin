@@ -6,24 +6,26 @@ import DraftPasteProcessor from 'draft-js/lib/DraftPasteProcessor';
 const { EditorState, ContentState } = Draft;
 import Editor from 'draft-js-plugins-editor';
 
-import createRichButtonsPlugin from '../';
 import createBlockBreakoutPlugin from 'draft-js-block-breakout-plugin';
-const richButtonsPlugin = createRichButtonsPlugin();
 const blockBreakoutPlugin = createBlockBreakoutPlugin();
+
+import createRichButtonsPlugin from '../';
+const richButtonsPlugin = createRichButtonsPlugin();
 
 const {
   // inline buttons
   ItalicButton, BoldButton,
   // block buttons
-  H2Button, ULButton, OLButton
+  H2Button, H3Button, ULButton, OLButton
 } = richButtonsPlugin;
 
 // custom inline button
-const MyIconButton = ({glyph, toggleInlineStyle, isActive, label, inlineStyle }) =>
+const MyIconButton = ({glyph, toggleInlineStyle, isActive, label, inlineStyle, onMouseDown }) =>
   <Button
     bsSize="small"
     onClick={toggleInlineStyle}
-    bsStyle={isActive ? 'danger' : 'default'}
+    onMouseDown={onMouseDown}
+    bsStyle={isActive ? 'info' : 'default'}
   > <Glyphicon glyph={glyph}/> </Button>;
 
 // custom block button
@@ -32,20 +34,23 @@ const MyBlockButton = ({iconName, toggleBlockType, isActive, label, blockType })
     bsSize="small"
     onClick={toggleBlockType}
     bsStyle={isActive ? 'primary' : 'default'}
-  >{label}</Button>;
+  > {label} </Button>;
 
 
 class CustomExample extends React.Component {
 
-  constructor(props) {
-    super(props);
+  state = {
+    content: this._getPlaceholder()
+  }
+
+  _getPlaceholder() {
     const placeholder =
       '<p>You can customize your <i>own</i> buttons easily.</p>' +
       '<ul><li>See the buttons <b>below</b></li></ul>'
     ;
-    this.state = {
-      content: this._getPlaceholder(placeholder)
-    }
+    const contentHTML = DraftPasteProcessor.processHTML(placeholder);
+    const state = ContentState.createFromBlockArray(contentHTML);
+    return Draft.EditorState.createWithContent(state);
   }
 
   _onChange(editorState) {
@@ -54,19 +59,11 @@ class CustomExample extends React.Component {
     });
   }
 
-  _getPlaceholder(placeholder) {
-    const contentHTML = DraftPasteProcessor.processHTML(placeholder);
-    const state = ContentState.createFromBlockArray(contentHTML);
-    return Draft.EditorState.createWithContent(state)
-  }
-
   render() {
     let { content } = this.state;
 
     return (
       <div>
-        <h2>Custom Buttons Example</h2>
-
         <Panel>
           <Editor
             editorState={content}
@@ -75,27 +72,17 @@ class CustomExample extends React.Component {
             plugins={[blockBreakoutPlugin, richButtonsPlugin]}
           />
         </Panel>
-
         <ButtonToolbar>
           <ButtonGroup>
-            <BoldButton>
-              <MyIconButton glyph="bold"/>
-            </BoldButton>
-            <ItalicButton>
-              <MyIconButton glyph="italic"/>
-            </ItalicButton>
+            <BoldButton><MyIconButton glyph="bold"/></BoldButton>
+            <ItalicButton><MyIconButton glyph="italic"/></ItalicButton>
           </ButtonGroup>
 
           <ButtonGroup>
-            <H2Button>
-              <MyBlockButton/>
-            </H2Button>
-            <ULButton>
-              <MyBlockButton/>
-            </ULButton>
-            <OLButton>
-              <MyBlockButton/>
-            </OLButton>
+            <H2Button><MyBlockButton/></H2Button>
+            <H3Button><MyBlockButton/></H3Button>
+            <ULButton><MyBlockButton/></ULButton>
+            <OLButton><MyBlockButton/></OLButton>
           </ButtonGroup>
         </ButtonToolbar>
       </div>

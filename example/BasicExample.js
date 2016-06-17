@@ -6,10 +6,11 @@ import DraftPasteProcessor from 'draft-js/lib/DraftPasteProcessor';
 const { EditorState, ContentState } = Draft;
 import Editor from 'draft-js-plugins-editor';
 
-import createRichButtonsPlugin from '../';
 import createBlockBreakoutPlugin from 'draft-js-block-breakout-plugin';
-const richButtonsPlugin = createRichButtonsPlugin();
 const blockBreakoutPlugin = createBlockBreakoutPlugin();
+
+import createRichButtonsPlugin from '../';
+const richButtonsPlugin = createRichButtonsPlugin();
 
 const {
   // inline buttons
@@ -21,12 +22,15 @@ const {
 
 class BasicExample extends React.Component {
 
-  constructor(props) {
-    super(props);
+  state = {
+    content: this._getPlaceholder()
+  }
+
+  _getPlaceholder() {
     const placeholder = '<p>Add <b>rich</b> controls to your editor with minimal hassle.</p>';
-    this.state = {
-      content: this._getPlaceholder(placeholder)
-    }
+    const contentHTML = DraftPasteProcessor.processHTML(placeholder);
+    const state = ContentState.createFromBlockArray(contentHTML);
+    return Draft.EditorState.createWithContent(state);
   }
 
   _onChange(editorState) {
@@ -35,18 +39,11 @@ class BasicExample extends React.Component {
     });
   }
 
-  _getPlaceholder(placeholder) {
-    const contentHTML = DraftPasteProcessor.processHTML(placeholder);
-    const state = ContentState.createFromBlockArray(contentHTML);
-    return Draft.EditorState.createWithContent(state)
-  }
-
   render() {
     let { content } = this.state;
 
     return (
       <div>
-        <h2>Basic Example</h2>
         <Well style={{ marginBottom:0 }}>
           <BoldButton/>
           <ItalicButton/>
