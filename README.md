@@ -62,6 +62,7 @@ Props unique to inline buttons:
 
   - **toggleInlineStyle** (_func_) - to be attached to your click event
   - **inlineStyle** (_string_) - the draft code for the style
+  - **onMouseDown** (_func_) - attach this to the onMouseDown event of your custom controls; important for preventing focus from leaving the editor when toggling an inline style with a click
 
 Props unique to block buttons:
 
@@ -74,8 +75,8 @@ Example:
 /*
   Stateless component for inline style buttons, using the passed props as well as a custom prop "iconName"
 */
-const MyIconButton = ({iconName, toggleInlineStyle, isActive, label, inlineStyle }) =>
-  <a onClick={toggleInlineStyle}>
+const MyIconButton = ({iconName, toggleInlineStyle, isActive, label, inlineStyle, onMouseDown }) =>
+  <a onClick={toggleInlineStyle} onMouseDown={onMouseDown}>
     <span
       className={`fa fa-${iconName}`}
       toolTip={label}

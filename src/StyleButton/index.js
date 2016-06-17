@@ -1,5 +1,14 @@
 import React, { Component, PropTypes } from 'react';
 
+const preventDefault = (event) => event.preventDefault();
+
+const wrapPrevent = (callback) => {
+  return (event) => {
+    event.preventDefault();
+    callback();
+  }
+}
+
 class StyleButton extends Component {
 
   static propTypes = {
@@ -39,10 +48,11 @@ class StyleButton extends Component {
 
     if (children && typeof children == 'object') {
       const ChildInput = React.cloneElement(children, {
-        toggleInlineStyle,
+        toggleInlineStyle: wrapPrevent(toggleInlineStyle),
         isActive,
         label,
-        inlineStyle
+        inlineStyle,
+        onMouseDown: preventDefault
       });
 
       return ChildInput;
@@ -56,7 +66,11 @@ class StyleButton extends Component {
     }
 
     return (
-      <span onClick={ toggleInlineStyle } style={spanStyle}>
+      <span
+        onMouseDown={ preventDefault }
+        onClick={ wrapPrevent(toggleInlineStyle) }
+        style={spanStyle}
+      >
         { label }
       </span>
     );
