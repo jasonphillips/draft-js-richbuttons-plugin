@@ -12,6 +12,7 @@ import { MAX_LIST_DEPTH, INLINE_STYLES, BLOCK_TYPES } from '../config/types';
 process.env.NODE_ENV = 'test';
 
 const exposedProperties = ['window', 'navigator', 'document'];
+const blankEvent = {preventDefault: () => null}
 
 global.document = jsdom('');
 global.window = document.defaultView;
@@ -133,12 +134,12 @@ describe('Draft RichButtons Plugin', () => {
           it('toggles isActive prop of child', () => {
             expect(childWithProps.prop('isActive')).to.be.false;
 
-            childWithProps.prop('toggleInlineStyle')();
+            childWithProps.prop('toggleInlineStyle')(blankEvent);
             buttons.update();
             expect(editorState.getCurrentInlineStyle().has(style)).to.be.true;
             expect(childWithProps.prop('isActive')).to.be.true;
 
-            childWithProps.prop('toggleInlineStyle')();
+            childWithProps.prop('toggleInlineStyle')(blankEvent);
             buttons.update();
             expect(childWithProps.prop('isActive')).to.be.false;
           });
