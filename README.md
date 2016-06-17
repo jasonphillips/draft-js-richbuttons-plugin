@@ -14,6 +14,16 @@ import createRichButtonsPlugin from 'draft-js-richbuttons-plugin';
 const richButtonsPlugin = createRichButtonsPlugin();
 ```
 
+In order to ensure buttons are re-rendered in sync with your editor even when other events change state, subscribe the plugin to your state changes like this in your component's `onChage` handler:
+
+```js
+onChange(editorState) {
+  this.setState({content: editorState}, () => {
+    richButtonsPlugin.onEditorChange(editorState);
+  });
+}
+```
+
 Now get any desired components for inline or block formatting buttons from the instance:
 
 ```js

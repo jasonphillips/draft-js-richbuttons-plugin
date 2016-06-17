@@ -1,6 +1,6 @@
 import StyleButton from './StyleButton';
 import BlockButton from './BlockButton';
-import { RichUtils } from 'draft-js';
+import { RichUtils, EditorState } from 'draft-js';
 import { MAX_LIST_DEPTH, INLINE_STYLES, BLOCK_TYPES } from './config/types';
 
 import decorateComponentWithProps from 'decorate-component-with-props';
@@ -10,22 +10,43 @@ const richButtonsPlugin = () => {
     getEditorState: undefined,
     setEditorState: undefined,
 
+    // buttons must be subscribed explicitly to ensure rerender
+    boundComponents: [],
+    bindToState: function bindToState(component, remove) {
+      if (remove) {
+        window.c = component
+        window.bound = this.boundComponents
+        this.boundComponents = this.boundComponents.filter((registered) =>
+          registered!==component
+        );
+      } else {
+        this.boundComponents.push(component);
+      }
+    },
+    notifyBound: function notifyBound() {
+      this.boundComponents.forEach((component) => component.forceUpdate());
+    },
+
     toggleInlineStyle: function toggleInlineStyle(inlineStyle) {
       const state = this.getEditorState();
+      const newState = RichUtils.toggleInlineStyle(
+        state,
+        inlineStyle
+      );
       this.setEditorState(
-        RichUtils.toggleInlineStyle(
-          state,
-          inlineStyle
-        )
+        newState
       );
     },
 
     toggleBlockType: function toggleBlockType(blockType) {
       const state = this.getEditorState();
+      const newState = RichUtils.toggleBlockType(
+        state,
+        blockType
+      );
       this.setEditorState(
-        RichUtils.toggleBlockType(
-          state,
-          blockType
+        EditorState.forceSelection(
+          newState, newState.getCurrentContent().getSelectionAfter()
         )
       );
     }
@@ -54,6 +75,13 @@ const richButtonsPlugin = () => {
       if (newState !== editorState) {
         setEditorState(newState);
       }
+    },
+
+    onEditorChange: (newState) => {
+      if (newState!==store.currentState) {
+        store.notifyBound();
+        store.currentState = newState;
+      }
     }
   };
 
@@ -61,6 +89,7 @@ const richButtonsPlugin = () => {
     configured[`${inlineStyle.label}Button`] = decorateComponentWithProps(
       StyleButton, {
         store,
+        bindToState: store.bindToState.bind(store),
         label: inlineStyle.label,
         inlineStyle: inlineStyle.style
       }
@@ -71,6 +100,7 @@ const richButtonsPlugin = () => {
     configured[`${blockType.label}Button`] = decorateComponentWithProps(
       BlockButton, {
         store,
+        bindToState: store.bindToState.bind(store),
         label: blockType.label,
         blockType: blockType.style
       }

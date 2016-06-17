@@ -4,9 +4,25 @@ class BlockButton extends Component {
 
   static propTypes = {
     store: PropTypes.object,
+    bindToState: PropTypes.func,
     label: PropTypes.string,
     blockType: PropTypes.string
   };
+
+  constructor(props) {
+    super(props);
+    this.componentWillMount = this.componentWillMount.bind(this);
+    this.componentWillUnmount = this.componentWillUnmount.bind(this);
+  }
+
+  // register with store updates to ensure rerender
+  componentWillMount() {
+    this.props.bindToState(this);
+  }
+
+  componentWillUnmount() {
+    this.props.bindToState(this, true);
+  }
 
   render() {
     const { store, blockType, label, children } = this.props;
