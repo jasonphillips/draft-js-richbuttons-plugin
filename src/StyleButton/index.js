@@ -11,8 +11,15 @@ class StyleButton extends Component {
   render() {
     const { store, inlineStyle, label, children } = this.props;
     const toggleInlineStyle = store.toggleInlineStyle.bind(store, inlineStyle);
-    const currentStyle = store.getEditorState().getCurrentInlineStyle();
-    const isActive = currentStyle.has(inlineStyle);
+    let isActive = undefined;
+
+    if (store.getEditorState) {
+      const currentStyle = store.getEditorState().getCurrentInlineStyle();
+      isActive = currentStyle.has(inlineStyle);
+    } else {
+      // editor not yet available / initialized
+      isActive = false;
+    }
 
     if (children && typeof children == 'object') {
       const ChildInput = React.cloneElement(children, {

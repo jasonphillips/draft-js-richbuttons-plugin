@@ -11,14 +11,20 @@ class BlockButton extends Component {
   render() {
     const { store, blockType, label, children } = this.props;
     const toggleBlockType = store.toggleBlockType.bind(store, blockType);
+    let isActive = undefined;
 
-    const editorState = store.getEditorState();
-    const selection = editorState.getSelection();
-    const currentType = editorState
-      .getCurrentContent()
-      .getBlockForKey(selection.getStartKey())
-      .getType();
-    const isActive = currentType == blockType;
+    if (store.getEditorState) {
+      const editorState = store.getEditorState();
+      const selection = editorState.getSelection();
+      const currentType = editorState
+        .getCurrentContent()
+        .getBlockForKey(selection.getStartKey())
+        .getType();
+      isActive = currentType == blockType;
+    } else {
+      // editor not yet available / initialized
+      isActive = false;
+    }
 
     if (children && typeof children == 'object') {
       const ChildInput = React.cloneElement(children, {
