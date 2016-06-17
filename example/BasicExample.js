@@ -9,7 +9,7 @@ import Editor from 'draft-js-plugins-editor';
 import createBlockBreakoutPlugin from 'draft-js-block-breakout-plugin';
 const blockBreakoutPlugin = createBlockBreakoutPlugin();
 
-import createRichButtonsPlugin from '../';
+import createRichButtonsPlugin from 'draft-js-richbuttons-plugin';
 const richButtonsPlugin = createRichButtonsPlugin();
 
 const {

@@ -19,6 +19,7 @@
     "draft-js": "^0.7.0",
     "draft-js-block-breakout-plugin": "0.0.2",
     "draft-js-plugins-editor": "^1.1.0",
+    "draft-js-richbuttons-plugin": "^1.0.0",
     "react": "^15.1.0",
     "react-bootstrap": "^0.29.4",
     "react-dom": "^15.1.0"
