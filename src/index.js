@@ -14,8 +14,6 @@ const richButtonsPlugin = () => {
     boundComponents: [],
     bindToState: function bindToState(component, remove) {
       if (remove) {
-        window.c = component
-        window.bound = this.boundComponents
         this.boundComponents = this.boundComponents.filter((registered) =>
           registered!==component
         );
