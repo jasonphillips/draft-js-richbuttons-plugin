@@ -77,7 +77,7 @@ var BasicExample = function (_React$Component) {
     }
 
     return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(BasicExample)).call.apply(_Object$getPrototypeO, [this].concat(args))), _this), _this.state = {
-      content: _this._getPlaceholder()
+      editorState: _this._getPlaceholder()
     }, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
@@ -92,14 +92,14 @@ var BasicExample = function (_React$Component) {
   }, {
     key: '_onChange',
     value: function _onChange(editorState) {
-      this.setState({ content: editorState }, function () {
+      this.setState({ editorState: editorState }, function () {
         richButtonsPlugin.onEditorChange(editorState);
       });
     }
   }, {
     key: 'render',
     value: function render() {
-      var content = this.state.content;
+      var editorState = this.state.editorState;
 
 
       return _react2.default.createElement(
@@ -126,7 +126,7 @@ var BasicExample = function (_React$Component) {
           _reactBootstrap.Panel,
           null,
           _react2.default.createElement(_draftJsPluginsEditor2.default, {
-            editorState: content,
+            editorState: editorState,
             onChange: this._onChange.bind(this),
             spellCheck: false,
             plugins: [blockBreakoutPlugin, richButtonsPlugin]
@@ -260,7 +260,7 @@ var CustomExample = function (_React$Component) {
     }
 
     return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(CustomExample)).call.apply(_Object$getPrototypeO, [this].concat(args))), _this), _this.state = {
-      content: _this._getPlaceholder()
+      editorState: _this._getPlaceholder()
     }, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
@@ -275,14 +275,14 @@ var CustomExample = function (_React$Component) {
   }, {
     key: '_onChange',
     value: function _onChange(editorState) {
-      this.setState({ content: editorState }, function () {
+      this.setState({ editorState: editorState }, function () {
         richButtonsPlugin.onEditorChange(editorState);
       });
     }
   }, {
     key: 'render',
     value: function render() {
-      var content = this.state.content;
+      var editorState = this.state.editorState;
 
 
       return _react2.default.createElement(
@@ -292,7 +292,7 @@ var CustomExample = function (_React$Component) {
           _reactBootstrap.Panel,
           null,
           _react2.default.createElement(_draftJsPluginsEditor2.default, {
-            editorState: content,
+            editorState: editorState,
             onChange: this._onChange.bind(this),
             spellCheck: false,
             plugins: [blockBreakoutPlugin, richButtonsPlugin]

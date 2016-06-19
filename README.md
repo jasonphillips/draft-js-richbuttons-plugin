@@ -20,7 +20,7 @@ In order to ensure buttons are re-rendered in sync with your editor even when ot
 
 ```js
 onChange(editorState) {
-  this.setState({content: editorState}, () => {
+  this.setState({editorState}, () => {
     richButtonsPlugin.onEditorChange(editorState);
   });
 }

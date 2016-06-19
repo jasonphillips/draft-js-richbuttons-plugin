@@ -40,7 +40,7 @@ const MyBlockButton = ({iconName, toggleBlockType, isActive, label, blockType })
 class CustomExample extends React.Component {
 
   state = {
-    content: this._getPlaceholder()
+    editorState: this._getPlaceholder()
   }
 
   _getPlaceholder() {
@@ -54,19 +54,19 @@ class CustomExample extends React.Component {
   }
 
   _onChange(editorState) {
-    this.setState({content: editorState}, () => {
+    this.setState({editorState}, () => {
       richButtonsPlugin.onEditorChange(editorState);
     });
   }
 
   render() {
-    let { content } = this.state;
+    let { editorState } = this.state;
 
     return (
       <div>
         <Panel>
           <Editor
-            editorState={content}
+            editorState={editorState}
             onChange={this._onChange.bind(this)}
             spellCheck={false}
             plugins={[blockBreakoutPlugin, richButtonsPlugin]}
