@@ -135,12 +135,10 @@ describe('Draft RichButtons Plugin', () => {
             expect(childWithProps.prop('isActive')).to.be.false;
 
             childWithProps.prop('toggleInlineStyle')(blankEvent);
-            buttons.update();
             expect(editorState.getCurrentInlineStyle().has(style)).to.be.true;
             expect(childWithProps.prop('isActive')).to.be.true;
 
             childWithProps.prop('toggleInlineStyle')(blankEvent);
-            buttons.update();
             expect(childWithProps.prop('isActive')).to.be.false;
           });
 
@@ -272,12 +270,10 @@ describe('Draft RichButtons Plugin', () => {
             expect(childWithProps.prop('isActive')).to.be.false;
 
             childWithProps.prop('toggleBlockType')();
-            buttons.update();
             expect(getCurrentBlockType(editorState)).to.equal(style);
             expect(childWithProps.prop('isActive')).to.be.true;
 
             childWithProps.prop('toggleBlockType')();
-            buttons.update();
             expect(getCurrentBlockType(editorState)).to.not.equal(style);
             expect(childWithProps.prop('isActive')).to.be.false;
           });

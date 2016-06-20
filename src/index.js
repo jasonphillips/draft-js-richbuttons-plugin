@@ -9,6 +9,15 @@ const richButtonsPlugin = () => {
   const store = {
     getEditorState: undefined,
     setEditorState: undefined,
+    currentState: undefined,
+
+    onChange: function onChange(newState) {
+      if (newState!==this.currentState) {
+        this.currentState = newState;
+        this.notifyBound();
+      }
+      return newState;
+    },
 
     // buttons must be subscribed explicitly to ensure rerender
     boundComponents: [],
@@ -52,8 +61,12 @@ const richButtonsPlugin = () => {
 
   const configured = {
     initialize: ({ getEditorState, setEditorState }) => {
-      store.getEditorState = getEditorState;
-      store.setEditorState = setEditorState;
+      store.currentState = getEditorState();
+      store.getEditorState = () => store.currentState;
+      store.setEditorState = (newState) => {
+        store.onChange(newState);
+        setEditorState(newState);
+      };
     },
 
     handleKeyCommand: (command, { getEditorState, setEditorState }) => {
@@ -75,12 +88,7 @@ const richButtonsPlugin = () => {
       }
     },
 
-    onEditorChange: (newState) => {
-      if (newState!==store.currentState) {
-        store.notifyBound();
-        store.currentState = newState;
-      }
-    }
+    onChange: (newState) => store.onChange(newState)
   };
 
   INLINE_STYLES.forEach((inlineStyle) => {
