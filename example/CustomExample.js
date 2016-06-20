@@ -29,7 +29,7 @@ const MyIconButton = ({glyph, toggleInlineStyle, isActive, label, inlineStyle, o
   > <Glyphicon glyph={glyph}/> </Button>;
 
 // custom block button
-const MyBlockButton = ({iconName, toggleBlockType, isActive, label, blockType }) =>
+const MyBlockButton = ({ toggleBlockType, isActive, label, blockType }) =>
   <Button
     bsSize="small"
     onClick={toggleBlockType}
@@ -54,9 +54,7 @@ class CustomExample extends React.Component {
   }
 
   _onChange(editorState) {
-    this.setState({editorState}, () => {
-      richButtonsPlugin.onEditorChange(editorState);
-    });
+    this.setState({editorState});
   }
 
   render() {

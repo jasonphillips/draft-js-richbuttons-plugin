@@ -34,9 +34,7 @@ class BasicExample extends React.Component {
   }
 
   _onChange(editorState) {
-    this.setState({editorState}, () => {
-      richButtonsPlugin.onEditorChange(editorState);
-    });
+    this.setState({editorState});
   }
 
   render() {
