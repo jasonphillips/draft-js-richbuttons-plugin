@@ -67,11 +67,11 @@ Example:
 /*
   Stateless component for inline style buttons, using the passed props as well as a custom prop "iconName"
 */
-const MyIconButton = ({iconName, toggleInlineStyle, isActive, label, inlineStyle, onMouseDown }) =>
+const MyIconButton = ({iconName, toggleInlineStyle, isActive, label, inlineStyle, onMouseDown, title}) =>
   <a onClick={toggleInlineStyle} onMouseDown={onMouseDown}>
     <span
       className={`fa fa-${iconName}`}
-      toolTip={label}
+      title={title ? title : label}
       style={{ color: isActive ? '#000' : '#777' }}
     />
   </a>;
@@ -84,7 +84,7 @@ The above presentational component could then be used this way:
   <MyIconButton iconName="bold"/>
 </BoldButton>
 <ItalicButton>
-  <MyIconButton iconName="italic"/>
+  <MyIconButton iconName="italic" title="Italicize" />
 </ItalicButton>
 ```
 
