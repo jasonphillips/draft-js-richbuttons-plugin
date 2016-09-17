@@ -1,11 +1,15 @@
 import StyleButton from './StyleButton';
 import BlockButton from './BlockButton';
 import { RichUtils, EditorState } from 'draft-js';
-import { MAX_LIST_DEPTH, INLINE_STYLES, BLOCK_TYPES } from './config/types';
+import { DEFAULT_MAX_LIST_DEPTH, DEFAULT_INLINE_STYLES, DEFAULT_BLOCK_TYPES } from './config/types';
 
 import decorateComponentWithProps from 'decorate-component-with-props';
 
-const richButtonsPlugin = () => {
+const richButtonsPlugin = ({
+  max_list_depth=DEFAULT_MAX_LIST_DEPTH,
+  inline_styles=DEFAULT_INLINE_STYLES,
+  block_types=DEFAULT_BLOCK_TYPES
+}) => {
   const store = {
     getEditorState: undefined,
     setEditorState: undefined,
@@ -81,7 +85,7 @@ const richButtonsPlugin = () => {
 
     onTab: (event, { getEditorState, setEditorState }) => {
       const editorState = getEditorState();
-      const newState = RichUtils.onTab(event, editorState, MAX_LIST_DEPTH);
+      const newState = RichUtils.onTab(event, editorState, max_list_depth);
 
       if (newState !== editorState) {
         setEditorState(newState);
@@ -91,7 +95,7 @@ const richButtonsPlugin = () => {
     onChange: (newState) => store.onChange(newState)
   };
 
-  INLINE_STYLES.forEach((inlineStyle) => {
+  inline_styles.forEach((inlineStyle) => {
     configured[`${inlineStyle.label}Button`] = decorateComponentWithProps(
       StyleButton, {
         store,
@@ -102,7 +106,7 @@ const richButtonsPlugin = () => {
     );
   });
 
-  BLOCK_TYPES.forEach((blockType) => {
+  block_types.forEach((blockType) => {
     configured[`${blockType.label}Button`] = decorateComponentWithProps(
       BlockButton, {
         store,
