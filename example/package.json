@@ -16,9 +16,9 @@
     "browserify": "^13.0.1"
   },
   "dependencies": {
-    "draft-js": "^0.7.0",
+    "draft-js": "~0.9.1",
     "draft-js-block-breakout-plugin": "0.0.2",
-    "draft-js-plugins-editor": "^1.1.0",
+    "draft-js-plugins-editor": "^2.0.0-beta9",
     "draft-js-richbuttons-plugin": "^1.0.0",
     "react": "^15.1.0",
     "react-bootstrap": "^0.29.4",
