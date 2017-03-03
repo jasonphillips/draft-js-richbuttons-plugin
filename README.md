@@ -2,8 +2,7 @@
 
 [![npm version](https://badge.fury.io/js/draft-js-richbuttons-plugin.svg)](http://badge.fury.io/js/draft-js-richbuttons-plugin)
 
-*This is a plugin for the `draft-js-plugins-editor`.*
-
+*This is a plugin for the `draft-js-plugins-editor`.* 
 This plugin allows you to add essential rich formatting buttons (inline and block styles) to your plugins-enabled editor.
 
 ## Usage
@@ -87,6 +86,10 @@ The above presentational component could then be used this way:
   <MyIconButton iconName="italic" title="Italicize" />
 </ItalicButton>
 ```
+
+## Version 2.x.x
+
+The `draft-js-plugins` project is approaching a v2 milestone, currently in beta. Use the 2.x branch of this repository if moving to the lastest version of that project; otherwise, 1.x is stable for the current release of `draft-js-plugins`.
 
 ## Key Bindings
 
