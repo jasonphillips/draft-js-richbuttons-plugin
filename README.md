@@ -1,6 +1,6 @@
 # DraftJS RichButtons Plugin
 
-[![npm version](https://badge.fury.io/js/draft-js-richbuttons-plugin.svg)](http://badge.fury.io/js/draft-js-richbuttons-plugin)
+[![npm version](https://badge.fury.io/js/draft-js-richbuttons-plugin.svg)](http://badge.fury.io/js/draft-js-richbuttons-plugin)  [![Build Status](https://travis-ci.org/jasonphillips/draft-js-richbuttons-plugin.svg?branch=master)](https://travis-ci.org/jasonphillips/draft-js-richbuttons-plugin)
 
 *This is a plugin for the `draft-js-plugins-editor`.* 
 This plugin allows you to add essential rich formatting buttons (inline and block styles) to your plugins-enabled editor.
