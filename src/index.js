@@ -69,7 +69,7 @@ const richButtonsPlugin = () => {
       };
     },
 
-    handleKeyCommand: (command, { getEditorState, setEditorState }) => {
+    handleKeyCommand: (command, state, { getEditorState, setEditorState }) => {
       const editorState = getEditorState();
       const newState = RichUtils.handleKeyCommand(editorState, command);
       if (newState) {
