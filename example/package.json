@@ -16,12 +16,13 @@
     "browserify": "^13.0.1"
   },
   "dependencies": {
-    "draft-js": "~0.9.1",
+    "draft-js": "~0.10.1",
     "draft-js-block-breakout-plugin": "0.0.2",
-    "draft-js-plugins-editor": "^2.0.0-beta9",
+    "draft-js-plugins-editor": "2.0.0-beta9",
     "draft-js-richbuttons-plugin": "^1.0.0",
-    "react": "^15.1.0",
-    "react-bootstrap": "^0.29.4",
-    "react-dom": "^15.1.0"
+    "prop-types": "^15.5.10",
+    "react": "^15.5.0",
+    "react-bootstrap": "^0.31.0",
+    "react-dom": "^15.5.0"
   }
 }
