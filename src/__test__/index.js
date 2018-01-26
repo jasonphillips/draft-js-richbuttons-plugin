@@ -60,6 +60,7 @@ describe('Draft RichButtons Plugin', () => {
 
     const {
       ItalicButton, BoldButton, MonospaceButton, UnderlineButton,
+      createStyleButton,
     } = richButtonsPlugin;
 
     describe('default buttons', () => {
@@ -96,6 +97,35 @@ describe('Draft RichButtons Plugin', () => {
         });
       });
     })
+
+    describe('custom inline style with createStyleButton()', () => {
+      // create a custom inline style button 
+      const BarStyleButton = createStyleButton({style: 'bar', label:'Bar'});
+
+      // render with refs for iteration
+      class ButtonsBar extends React.Component {
+        render() {
+          return (
+            <div>
+              <BarStyleButton ref="BarButton"/>
+            </div>
+          );
+        }
+      }
+      const buttons = mount(<ButtonsBar/>);
+
+      it('renders with correct label', () => {
+        expect(buttons.ref('BarButton')).to.have.text('Bar');
+      });
+
+      it('toggles custom inline style on and off', () => {
+        expect(editorState.getCurrentInlineStyle().has('bar')).to.be.false;
+        buttons.ref('BarButton').simulate('click');
+        expect(editorState.getCurrentInlineStyle().has('bar')).to.be.true;
+        buttons.ref('BarButton').simulate('click');
+        expect(editorState.getCurrentInlineStyle().has('bar')).to.be.false;
+      });
+    });
 
     describe('custom buttons', () => {
       // render with refs for iteration
@@ -162,7 +192,8 @@ describe('Draft RichButtons Plugin', () => {
 
     const {
       ParagraphButton, BlockquoteButton, CodeButton, OLButton, ULButton,
-      H1Button, H2Button, H3Button, H4Button, H5Button, H6Button
+      H1Button, H2Button, H3Button, H4Button, H5Button, H6Button,
+      createBlockButton,
     } = richButtonsPlugin;
 
     describe('default buttons', () => {
@@ -205,6 +236,35 @@ describe('Draft RichButtons Plugin', () => {
             expect(getCurrentBlockType(editorState)).to.not.equal(style);
           });
         });
+      });
+    });
+
+    describe('custom block with createBlockButton()', () => {
+      // create a custom block type 
+      const FooBlockButton = createBlockButton({type: 'foo', label:'Foo'});
+
+      // render with refs for iteration
+      class ButtonsBar extends React.Component {
+        render() {
+          return (
+            <div>
+              <FooBlockButton ref="FooButton"/>
+            </div>
+          );
+        }
+      }
+      const buttons = mount(<ButtonsBar/>);
+
+      it('renders with correct label', () => {
+        expect(buttons.ref('FooButton')).to.have.text('Foo');
+      });
+
+      it('toggles custom block type on and off', () => {
+        expect(getCurrentBlockType(editorState)).to.not.equal('foo');
+        buttons.ref('FooButton').simulate('click');
+        expect(getCurrentBlockType(editorState)).to.equal('foo');
+        buttons.ref('FooButton').simulate('click');
+        expect(getCurrentBlockType(editorState)).to.not.equal('foo');
       });
     });
 

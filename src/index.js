@@ -113,6 +113,24 @@ const richButtonsPlugin = () => {
     );
   });
 
+  configured.createBlockButton = ({type, label}) => decorateComponentWithProps(
+    BlockButton, {
+      store,
+      bindToState: store.bindToState.bind(store),
+      label: label,
+      blockType: type
+    }
+  );
+
+  configured.createStyleButton = ({style, label}) => decorateComponentWithProps(
+    StyleButton, {
+      store,
+      bindToState: store.bindToState.bind(store),
+      label: label,
+      inlineStyle: style
+    }
+  );
+
   return configured;
 };
 
