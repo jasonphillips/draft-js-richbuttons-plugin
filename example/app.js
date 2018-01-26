@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import BasicExample from './BasicExample';
 import CustomExample from './CustomExample';
+import CustomTypes from './CustomBlocksAndStyles';
 import { Grid, Alert } from 'react-bootstrap';
 
 class App extends React.Component {
@@ -28,6 +29,14 @@ class App extends React.Component {
           </a>
         </h2>
         <CustomExample/>
+        <p> </p>
+        <p> </p>
+        <h2>Custom Block Types &amp; Styles &nbsp;
+          <a href="https://github.com/jasonphillips/draft-js-richbuttons-plugin/blob/master/example/CustomBlocksAndStyles.js">
+            &#123;code&#125;
+          </a>
+        </h2>
+        <CustomTypes/>
       </Grid>
     );
   }
