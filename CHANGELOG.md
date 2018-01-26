@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 2.2.0 - 2018-01-26
+
+Buttons for custom block types or custom inline styles can now easily be generated; see the example at `/example/CustomBlocksAndStyles.js`.
+
 ## 2.1.0 - 2017-06-22
 Updated key handling code to use new signature from recent draft-js changes; move to latest release candidate of draft-js-plugins.
 
