@@ -1,13 +1,13 @@
-export const MAX_LIST_DEPTH = 5;
+export const DEFAULT_MAX_LIST_DEPTH = 5;
 
-export const INLINE_STYLES = [
+export const DEFAULT_INLINE_STYLES = [
   { label: 'Bold', style: 'BOLD' },
   { label: 'Italic', style: 'ITALIC' },
   { label: 'Underline', style: 'UNDERLINE' },
   { label: 'Monospace', style: 'CODE' },
 ];
 
-export const BLOCK_TYPES = [
+export const DEFAULT_BLOCK_TYPES = [
   { label: 'H1', style: 'header-one' },
   { label: 'H2', style: 'header-two' },
   { label: 'H3', style: 'header-three' },
