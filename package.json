@@ -22,9 +22,9 @@
     "react-component"
   ],
   "peerDependencies": {
-    "draft-js-plugins-editor": "2.0.0-rc2",
-    "react": "^15.5.0",
-    "react-dom": "^15.5.0"
+    "draft-js-plugins-editor": "^2.0.0",
+    "react": "^15.0.0 || ^16.0.0",
+    "react-dom": "^15.0.0 || ^16.0.0"
   },
   "scripts": {
     "clean": "rimraf lib",
@@ -46,7 +46,8 @@
     "babel-preset-stage-0": "^6.16.0",
     "chai": "^3.5.0",
     "chai-enzyme": "^0.7.1",
-    "draft-js-plugins-editor": "2.0.0-beta9",
+    "draft-js-plugins-editor": "~2.0.4",
+    "draft-js": "~0.10.5",
     "enzyme": "^2.9.0",
     "jsdom": "^9.8.3",
     "jsdom-global": "^2.1.0",
