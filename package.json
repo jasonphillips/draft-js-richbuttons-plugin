@@ -1,6 +1,6 @@
 {
   "name": "draft-js-richbuttons-plugin",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "Rich Editing Buttons Plugin for DraftJS Plugins Editor",
   "author": {
     "name": "Jason Phillips",
