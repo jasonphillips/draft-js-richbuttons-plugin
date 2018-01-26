@@ -9,7 +9,7 @@ import Editor from 'draft-js-plugins-editor';
 import createBlockBreakoutPlugin from 'draft-js-block-breakout-plugin';
 const blockBreakoutPlugin = createBlockBreakoutPlugin();
 
-import createRichButtonsPlugin from 'draft-js-richbuttons-plugin';
+import createRichButtonsPlugin from '../' //  from 'draft-js-richbuttons-plugin';
 const richButtonsPlugin = createRichButtonsPlugin();
 
 const {
@@ -63,12 +63,14 @@ class CustomExample extends React.Component {
     return (
       <div>
         <Panel>
-          <Editor
-            editorState={editorState}
-            onChange={this._onChange.bind(this)}
-            spellCheck={false}
-            plugins={[blockBreakoutPlugin, richButtonsPlugin]}
-          />
+          <Panel.Body>
+            <Editor
+              editorState={editorState}
+              onChange={this._onChange.bind(this)}
+              spellCheck={false}
+              plugins={[blockBreakoutPlugin, richButtonsPlugin]}
+            />
+          </Panel.Body>
         </Panel>
         <ButtonToolbar>
           <ButtonGroup>

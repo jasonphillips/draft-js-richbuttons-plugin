@@ -17,14 +17,14 @@ class App extends React.Component {
         <p> </p>
         <h2>Basic Example &nbsp;
           <a href="https://github.com/jasonphillips/draft-js-richbuttons-plugin/blob/master/example/BasicExample.js">
-            &#123;..&#125;
+            &#123;code&#125;
           </a>
         </h2>
         <BasicExample/>
         <p> </p>
         <h2>Custom Buttons Example &nbsp;
           <a href="https://github.com/jasonphillips/draft-js-richbuttons-plugin/blob/master/example/CustomExample.js">
-            &#123;..&#125;
+            &#123;code&#125;
           </a>
         </h2>
         <CustomExample/>

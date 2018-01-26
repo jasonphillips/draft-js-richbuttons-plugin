@@ -54,12 +54,14 @@ class BasicExample extends React.Component {
           <OLButton/>
         </Well>
         <Panel>
-          <Editor
-            editorState={editorState}
-            onChange={this._onChange.bind(this)}
-            spellCheck={false}
-            plugins={[blockBreakoutPlugin, richButtonsPlugin]}
-          />
+          <Panel.Body>
+            <Editor
+              editorState={editorState}
+              onChange={this._onChange.bind(this)}
+              spellCheck={false}
+              plugins={[blockBreakoutPlugin, richButtonsPlugin]}
+            />
+          </Panel.Body>
         </Panel>
       </div>
     );
