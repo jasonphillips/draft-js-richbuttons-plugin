@@ -1,6 +1,6 @@
 # DraftJS RichButtons Plugin
 
-[![npm version](https://badge.fury.io/js/draft-js-richbuttons-plugin.svg)](http://badge.fury.io/js/draft-js-richbuttons-plugin)  [![Build Status](https://travis-ci.org/jasonphillips/draft-js-richbuttons-plugin.svg?branch=master)](https://travis-ci.org/jasonphillips/draft-js-richbuttons-plugin)
+[![npm version](https://badge.fury.io/js/draft-js-richbuttons-plugin.svg)](http://badge.fury.io/js/draft-js-richbuttons-plugin)  [![Build Status](https://travis-ci.org/jasonphillips/draft-js-richbuttons-plugin.svg?branch=master)](https://travis-ci.org/jasonphillips/draft-js-richbuttons-plugin)  [![npm downloads](https://img.shields.io/npm/dm/draft-js-richbuttons-plugin.svg)](https://www.npmjs.com/package/draft-js-richbuttons-plugin)
 
 *This is a plugin for the `draft-js-plugins-editor`.* 
 This plugin allows you to add essential rich formatting buttons (inline and block styles) to your plugins-enabled editor.
@@ -39,6 +39,22 @@ Render these where desired in your component:
   <OLButton/>
 </div>
 ```
+
+## Custom Block Types or Inline Styles
+
+Button components behaving exactly like those above can be obtained for any custom block or inline style types used in your draft instance, by invoking either `createStyleButton` or `createBlockButton`:
+
+```js
+const { createStyleButton, createBlockButton } = richButtonsPlugin;
+
+// create a custom inlinestyle button
+const RedStyleButton = createStyleButton({style: 'RED', label: 'Red'});
+
+// create a custom block-type button
+const BorderedBlockButton = createBlockButton({type: 'BorderedBox', label: 'LittleBox'}); 
+```
+
+See more complete code in the included example.
 
 ## Rendering Your Own Buttons
 
@@ -86,10 +102,6 @@ The above presentational component could then be used this way:
   <MyIconButton iconName="italic" title="Italicize" />
 </ItalicButton>
 ```
-
-## Version 2.x.x
-
-The `draft-js-plugins` project is approaching a v2 milestone, currently in beta. Use the 2.x branch of this repository if moving to the lastest version of that project; otherwise, 1.x is stable for the current release of `draft-js-plugins`.
 
 ## Key Bindings
 
