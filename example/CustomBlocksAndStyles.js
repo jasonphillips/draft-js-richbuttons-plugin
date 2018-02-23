@@ -33,7 +33,7 @@ const styleMap = {
   },
 };
 
-// now the draft configuration for the custom block
+// all this does is set a css class (.bordered_style) on the custom block
 const blockStyleFn = (contentBlock) => {
   const type = contentBlock.getType();
   if (type==='BorderedBox') {
@@ -41,6 +41,7 @@ const blockStyleFn = (contentBlock) => {
   }
 }
 
+// this maps <summary/> tags to the custom block type mainly so that I can create them in the placeholder HTML below 
 const blockRenderMap = Draft.DefaultDraftBlockRenderMap.merge(
   Immutable.Map({
     'BorderedBox': {
