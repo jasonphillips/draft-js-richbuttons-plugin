@@ -69,23 +69,12 @@ const richButtonsPlugin = () => {
       };
     },
 
-    handleKeyCommand: (command, state, { getEditorState, setEditorState }) => {
-      const editorState = getEditorState();
-      const newState = RichUtils.handleKeyCommand(editorState, command);
-      if (newState) {
-        setEditorState(newState);
-        return true;
-      }
-      return false;
+    handleKeyCommand: (editorState, command) => {
+      return RichUtils.handleKeyCommand(editorState, command);
     },
 
-    onTab: (event, { getEditorState, setEditorState }) => {
-      const editorState = getEditorState();
-      const newState = RichUtils.onTab(event, editorState, MAX_LIST_DEPTH);
-
-      if (newState !== editorState) {
-        setEditorState(newState);
-      }
+    onTab: (event, editor) => {
+      return RichUtils.onTab(event, editor.getEditorState(), MAX_LIST_DEPTH);
     },
 
     onChange: (newState) => store.onChange(newState)
